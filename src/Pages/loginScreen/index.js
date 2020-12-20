@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Dimensions, Text, View, StyleSheet, ScrollView} from 'react-native';
+import {Dimensions, Text, View, StyleSheet, ScrollView, TouchableOpacity, Image} from 'react-native';
 import {showMessage} from 'react-native-flash-message';
 import LinearGradient from 'react-native-linear-gradient';
-import {Button, Gap, Input} from '../../component';
+import {Button, Gap, Input, Password} from '../../component';
 import {colors, fonts, storeData} from '../../utils';
 import Axios from 'axios';
 
@@ -65,7 +65,6 @@ export default class LoginScreen extends Component {
         });
       }
     };
-    console.log('link', this.state.username, this.state.password);
     return (
       <View style={{flex: 1}}>
         <LinearGradient
@@ -108,7 +107,7 @@ export default class LoginScreen extends Component {
                 style={primaryStyle.button}
                 label="Register"
                 click={() =>
-                  this.props.navigation.replace('Home')
+                  this.props.navigation.navigate('Register')
                 }
               />
             </View>

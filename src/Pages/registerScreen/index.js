@@ -80,28 +80,33 @@ export default class RegisterScreen extends Component {
             <View style={styles.logowrapper}>
               <Text style={styles.icontext}>Registration</Text>
             </View>
+            <ScrollView vertical>
             <View style={{flex: 1}}>
               <Input
                 texts={'firstName'}
                 onChangeText={(event) =>
-                  this.setState({username: event.nativeEvent.text})
+                  this.setState({firstName: event.nativeEvent.text})
                 }
               />
               <Gap height={20} />
               <Input
                 texts={'lastName'}
                 onChangeText={(event) =>
-                  this.setState({password: event.nativeEvent.text})
+                  this.setState({lastName: event.nativeEvent.text})
                 }
                  
               />
+              <Gap height={20} />
+
               <Input
                 texts={'email'}
                 onChangeText={(event) =>
-                  this.setState({password: event.nativeEvent.text})
+                  this.setState({email: event.nativeEvent.text})
                 }
                  
               />
+              <Gap height={20} />
+
               <Input
                 texts={'username'}
                 onChangeText={(event) =>
@@ -109,17 +114,21 @@ export default class RegisterScreen extends Component {
                 }
                 secureTextEntry={true}
               />
+              <Gap height={20} />
+
               <Input
                 texts={'password'}
                 onChangeText={(event) =>
                   this.setState({password: event.nativeEvent.text})
                 }
-                secureTextEntry={true}
+                secure={true}
               />
+              <Gap height={20} />
+
               <Input
                 texts={'age'}
                 onChangeText={(event) =>
-                  this.setState({password: event.nativeEvent.text})
+                  this.setState({age: event.nativeEvent.text})
                 }
                  
               />
@@ -138,7 +147,10 @@ export default class RegisterScreen extends Component {
                   })
                 }
               />
+              <Gap height={20} />
+
             </View>
+            </ScrollView>
           </View>
         </LinearGradient>
       </View>
@@ -154,7 +166,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   icontext: {
-    fontSize: 70,
+    fontSize: 40,
     color: 'white',
     fontFamily: fonts.semibold,
   },

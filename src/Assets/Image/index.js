@@ -1,3 +1,2 @@
-import Thumbnail from './thumbnail.png';
-import ThumbnailImage from './thumbnail.jpg';
-export {Thumbnail, ThumbnailImage};
+import eye from './eye.png';
+export {eye};
