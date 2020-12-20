@@ -20,52 +20,55 @@ export default class RegisterScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
       username: '',
       password: '',
+      age: ''
     };
   }
-  render() {
-    const sendData = (data) => {
-      try {
-        Axios.post('https://s1mple-tours-be.herokuapp.com/auth/client/login', {
-          username: data.user,
-          password: data.pass,
-        })
-          .then(async (res) => {
-            console.log(res);
-            showMessage({
-              message: 'Success',
-              description: `Welcome to apps ${data.user}`,
-              type: 'success',
-              icon: 'success',
-            });
-            const infoUser = {
-              name: data.user,
-              token: res.data.token,
-              uid: res.data.payload.userId,
-            };
-            storeData('user', infoUser);
-            this.props.navigation.navigate('Home');
-          })
-          .catch((err) => {
-            console.log(err);
-            showMessage({
-              message: err.name,
-              description: err.message,
-              type: 'danger',
-              icon: 'danger',
-            });
+
+   sendData = (data) => {
+    try {
+      Axios.post('https://s1mple-tours-be.herokuapp.com/user/register', {
+        firstName: data.user,
+        lastName: data.event,
+        email: data.email,
+        username: data.username,
+        password: data.password,
+        age: data.age
+      })
+        .then(async (res) => {
+          console.log(res);
+          showMessage({
+            message: 'Success',
+            description: `Welcome to apps ${data.user}`,
+            type: 'success',
+            icon: 'success',
           });
-      } catch (err) {
-        showMessage({
-          message: 'Gagal',
-          description: 'Login tidak dapat diproses',
-          type: 'danger',
-          icon: 'danger',
+          this.props.navigation.navigate('Login');
+        })
+        .catch((err) => {
+          console.log(err);
+          showMessage({
+            message: err.name,
+            description: err.message,
+            type: 'danger',
+            icon: 'danger',
+          });
         });
-      }
-    };
-    console.log('link', this.state.username, this.state.password);
+    } catch (err) {
+      showMessage({
+        message: 'Gagal',
+        description: 'Registrasi tidak dapat diproses',
+        type: 'danger',
+        icon: 'danger',
+      });
+    }
+  };
+
+  render() {
     return (
       <View style={{flex: 1}}>
         <LinearGradient
@@ -75,22 +78,50 @@ export default class RegisterScreen extends Component {
           style={styles.linear}>
           <View style={styles.wrapper}>
             <View style={styles.logowrapper}>
-              <Text style={styles.icontext}>MOVIES</Text>
+              <Text style={styles.icontext}>Registration</Text>
             </View>
             <View style={{flex: 1}}>
               <Input
-                texts={'Username'}
-                onChangeText={(user) =>
-                  this.setState({username: user.nativeEvent.text})
+                texts={'firstName'}
+                onChangeText={(event) =>
+                  this.setState({username: event.nativeEvent.text})
                 }
               />
               <Gap height={20} />
               <Input
-                texts={'Password'}
-                onChangeText={(pass) =>
-                  this.setState({password: pass.nativeEvent.text})
+                texts={'lastName'}
+                onChangeText={(event) =>
+                  this.setState({password: event.nativeEvent.text})
                 }
-                secure
+                 
+              />
+              <Input
+                texts={'email'}
+                onChangeText={(event) =>
+                  this.setState({password: event.nativeEvent.text})
+                }
+                 
+              />
+              <Input
+                texts={'username'}
+                onChangeText={(event) =>
+                  this.setState({password: event.nativeEvent.text})
+                }
+                secureTextEntry={true}
+              />
+              <Input
+                texts={'password'}
+                onChangeText={(event) =>
+                  this.setState({password: event.nativeEvent.text})
+                }
+                secureTextEntry={true}
+              />
+              <Input
+                texts={'age'}
+                onChangeText={(event) =>
+                  this.setState({password: event.nativeEvent.text})
+                }
+                 
               />
               <Gap height={80} />
               <Button
@@ -98,8 +129,12 @@ export default class RegisterScreen extends Component {
                 label="Register"
                 click={() =>
                   sendData({
-                    user: this.state.username,
-                    pass: this.state.password,
+                    firstName: this.state.user,
+                    lastName: this.state.event,
+                    email: this.state.email,
+                    username: this.state.username,
+                    password: this.state.password,
+                    age: this.state.age
                   })
                 }
               />
